@@ -51,3 +51,4 @@ uritemplate==4.1.1
 urllib3==1.26.8
 djoser
 django-celery-beat
+django-filter

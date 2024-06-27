@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_celery_beat',
     'djoser',
+    'django_filters'
 ]
 
 MIDDLEWARE = [

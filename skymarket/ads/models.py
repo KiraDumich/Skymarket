@@ -2,14 +2,16 @@ from django.conf import settings
 from django.db import models
 
 
+NULLABLE = {'blank': True, 'null': True}
+
+
 class Ad(models.Model):
 
     image = models.ImageField(
         upload_to="images/",
         verbose_name="фото",
         help_text="Разместите фото для объявления",
-        null=True,
-        blank=True,
+        **NULLABLE,
     )
 
     title = models.CharField(
@@ -36,11 +38,10 @@ class Ad(models.Model):
     )
 
     description = models.CharField(
-        blank=True,
-        null=True,
         max_length=1000,
         verbose_name="Описание товара",
-        help_text="Введите описание товара"
+        help_text="Введите описание товара",
+        **NULLABLE,
     )
 
     class Meta:

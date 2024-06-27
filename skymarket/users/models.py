@@ -59,8 +59,7 @@ class User(AbstractBaseUser):
         upload_to="photos/",
         verbose_name="фото",
         help_text="Разместите Ваше фото",
-        null=True,
-        blank=True,
+        **NULLABLE,
     )
 
     is_active = models.BooleanField(
