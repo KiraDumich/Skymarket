@@ -6,7 +6,7 @@ NULLABLE = {'blank': True, 'null': True}
 
 
 class Ad(models.Model):
-
+    """Модель для объявления"""
     image = models.ImageField(
         upload_to="images/",
         verbose_name="фото",
@@ -51,6 +51,7 @@ class Ad(models.Model):
 
 
 class Comment(models.Model):
+    """Модель для комментариев под объявлениями"""
     text = models.CharField(
         max_length=1000,
         verbose_name="Комментарий",
