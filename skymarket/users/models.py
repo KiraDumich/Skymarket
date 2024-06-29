@@ -18,6 +18,7 @@ class UserRoles:
 
 
 class User(AbstractBaseUser):
+    """Модель пользователя"""
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'phone']
 

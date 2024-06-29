@@ -67,15 +67,18 @@ class AdViewSet(viewsets.ModelViewSet):
     filterset_class = AdFilter
 
     def perform_create(self, serializer):
+        """Создание объявления"""
         user = self.request.user
         serializer.save(author=user)
 
     def get_serializer_class(self):
+        """Получение нужного сериализатора для объявления"""
         if self.action in ["retrieve", "create", "update", "partial_update", "destroy"]:
             return AdDetailSerializer
         return AdSerializer
 
     def get_permissions(self):
+        """Получение прав на действия пользователя над проектом"""
         permission_classes = (AllowAny, )
         if self.action in ["retrieve"]:
             permission_classes = (AllowAny, )
@@ -84,6 +87,7 @@ class AdViewSet(viewsets.ModelViewSet):
         return tuple(permission() for permission in permission_classes)
 
     def get_queryset(self):
+        """Для просмотра своего объявления"""
         if self.action == "me":
             return Ad.objects.filter(author=self.request.user).all()
         return Ad.objects.all()
@@ -104,17 +108,20 @@ class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
 
     def perform_create(self, serializer):
+        """Создание комментария"""
         ad_id = self.kwargs.get("ad_pk")
         ad_instance = get_object_or_404(Ad, id=ad_id)
         user = self.request.user
         serializer.save(author=user, ad=ad_instance)
 
     def get_queryset(self):
+        """Получение объектов"""
         ad_id = self.kwargs.get("ad_pk")
         ad_instance = get_object_or_404(Ad, id=ad_id)
         return ad_instance.comments.all()
 
     def get_permissions(self):
+        """Получения прав на действия пользователя над объектом"""
         permission_classes = (IsAuthenticated,)
         if self.action in ["list", "retrieve"]:
             permission_classes = (IsAuthenticated,)
