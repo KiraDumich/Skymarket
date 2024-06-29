@@ -1,9 +1,15 @@
 FROM python:3
 
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    gcc \
+    libffi-dev \
+    libyaml-dev
+
 WORKDIR /code
 
 COPY /requirements.txt /
-# Устанавливает переменную окружения, которая гарантирует, что вывод из python будет отправлен прямо в терминал без предварительной буферизации
+
 ENV PYTHONUNBUFFERED 1
 
 RUN pip install -r /requirements.txt --no-cache-dir
